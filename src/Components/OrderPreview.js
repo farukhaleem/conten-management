@@ -26,7 +26,7 @@ function OrderPreview() {
       <HeaderMenu />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="fluid">
+        <Container maxWidth={false}>
           <h1>Order Preview</h1>
           <OrdersPreviewGrid />
         </Container>

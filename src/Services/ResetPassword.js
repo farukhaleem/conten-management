@@ -7,7 +7,7 @@ export const ResetPass = (newPass, resPass) => {
     formData.append('resPass', resPass);
     formData.append('user_id', localStorage.getItem('id'));
 
-    const res = axios.post('/area/api/reset.php', formData)
+    const res = axios.post('/api/reset.php', formData)
     .then(function (response) {
         return response.data;
     })

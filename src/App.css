@@ -142,7 +142,7 @@ color: #3f51b5;
 
 .filepond--drop-label.filepond--drop-label label{
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 40px ;
 }
 .filepond--list.filepond--list{
@@ -251,7 +251,7 @@ border: 2px dashed #3f51b5;
 }
 
 div[data-hopper-state="drag-over"].filepond--root .filepond--drop-label{
-background-color: #826be04a ;
+background-color: #5a72fb33 ;
 }
 
 button[type="submit"]{
@@ -261,6 +261,11 @@ button[type="submit"] .MuiButton-label{
   padding: 13px;
   margin: auto 10px;
   font-size: 15px;
+}
+
+.password-eye svg{
+  width: 0.8em;
+  height: 0.8em;
 }
 
 @media only screen and (max-width: 767px){

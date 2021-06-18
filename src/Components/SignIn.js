@@ -93,6 +93,8 @@ export default function SignIn() {
           localStorage.setItem('userName', user.c_name);
           localStorage.setItem('token', user.token);
           localStorage.setItem('role', true);
+          localStorage.setItem('user_token', user.user_token);
+          localStorage.setItem('domain_token', user.domain_token);
           return history.push(path+'/')
         }else if(user.status === 'error'){
           setReq(user.msg);

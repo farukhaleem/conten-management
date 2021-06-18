@@ -15,6 +15,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import clsx from 'clsx';
 import Alert from '@material-ui/lab/Alert';
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -35,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
 	margin: {
 		margin: theme.spacing(1, 'auto'),
 	},
+	tokenHeading: {
+		fontSize: 18,
+		fontWeight: 600,
+		marginBottom: 0
+	  },
 	error: {
 		color: 'red'
 	}
@@ -120,13 +127,17 @@ let ChangePasswordForm = () => {
 	}
 
 	return (
-		<Container component="main" maxWidth="xs" style={{marginLeft: 0, paddingLeft: 0}}>
-			<Card className={classes.root} variant="outlined">
+		<Container component="main">
+			<Card className={classes.root} variant="elevation">
 				<CardContent>
+				<Typography gutterBottom variant="h5" component="h2" className={classes.tokenHeading}>
+					Change Password
+				</Typography>
+				
 				{resMsg ? <Alert severity="success">{resMsg}</Alert> : '' }
 					<div className={classes.paper}>
 						<form className={classes.form} noValidate onSubmit={handleSubmit}>
-							<span className={classes.error} >{err}</span>
+							<small className={classes.error} >{err}</small>
 							<FormControl fullWidth className={clsx(classes.margin, classes.textField)} variant="outlined">
 								<InputLabel htmlFor="outlined-adornment-password">Enter New Password</InputLabel>
 								<OutlinedInput
@@ -139,6 +150,7 @@ let ChangePasswordForm = () => {
 									endAdornment={
 										<InputAdornment position="end">
 											<IconButton
+												className="password-eye"
 												aria-label="toggle password visibility"
 												onClick={handleClickShowPassword}
 												onMouseDown={handleMouseDownPassword}
@@ -163,6 +175,7 @@ let ChangePasswordForm = () => {
 									endAdornment={
 										<InputAdornment position="end">
 											<IconButton
+												className="password-eye"
 												aria-label="toggle password visibility"
 												onClick={handleClickShowRepeatPassword}
 												onMouseDown={handleMouseDownRepeatPassword}
@@ -184,7 +197,7 @@ let ChangePasswordForm = () => {
 								className={classes.submit}
 							>
 								Update
-          		</Button>
+          					</Button>
 						</form>
 					</div>
 				</CardContent>

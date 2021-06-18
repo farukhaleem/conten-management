@@ -40,6 +40,17 @@ export default function OrdersGrid() {
     },
     { field: 'payNow', headerName: 'Pay Now', width:200, 
       renderCell: (params) => {
+        if(parseInt(params.row.remaining) <= 0){
+          return(
+            <Button
+              variant="contained"
+              size="small"
+              disabled
+            >
+              Paid
+            </Button>
+          )
+        }
         return(
           <strong>
             <Button
@@ -47,8 +58,13 @@ export default function OrdersGrid() {
               color="primary"
               size="small"
             >
-              <a style={{color:'#fff'}} target="_blank" href={localStorage.getItem('domain_url')+'area/payment-proceed.php?order_id='+params.row.payNow} className="nav-link">
-              Pay Now
+              <a 
+                style={{color:'#fff'}} 
+                target="_blank" 
+                rel="noreferrer noopener" 
+                href={'/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+params.row.payNow+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token')} 
+                className="nav-link">
+                Pay Now
               </a>
             </Button>
           </strong>

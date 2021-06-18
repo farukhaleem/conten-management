@@ -26,7 +26,7 @@ function ChangePassword(){
       <HeaderMenu />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="fluid">
+        <Container maxWidth={false}>
           <h1>Change Password</h1>
           <ChangePasswordForm />
         </Container>

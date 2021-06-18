@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { getOrder } from './../Services/getOrdersService';
 import Button from '@material-ui/core/Button';
-import Alert from '@material-ui/lab/Alert';
+// import Alert from '@material-ui/lab/Alert';
 
 export default function TrackOrderItem(props) {
   let [order, setOrder] = useState([]);
@@ -45,6 +45,17 @@ export default function TrackOrderItem(props) {
     {
       field: 'payNow', headerName: 'Pay Now', width: 200,
       renderCell: (params) => {
+        if(parseInt(params.row.remaining) <= 0){
+          return(
+            <Button
+              variant="contained"
+              size="small"
+              disabled
+            >
+              Paid
+            </Button>
+          )
+        }
         return (
           <strong>
             <Button
@@ -52,7 +63,12 @@ export default function TrackOrderItem(props) {
               color="primary"
               size="small"
             >
-              <a style={{ color: '#fff' }} target="_blank" href={localStorage.getItem('domain_url') + 'area/payment-proceed.php?order_id=' + params.row.payNow} className="nav-link">
+              <a 
+                style={{ color: '#fff' }} 
+                rel="noreferrer noopener" 
+                target="_blank" 
+                href={'/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+params.row.payNow+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token')}
+                className="nav-link">
                 Pay Now
               </a>
             </Button>
@@ -130,7 +146,7 @@ export default function TrackOrderItem(props) {
   // } else {
 
     return (
-      <div style={{ height: 400, width: 'auto', background: '#fff' }}>
+      <div style={{ height: 'calc(100vh - 275px)', width: 'auto', background: '#fff' }}>
         <div style={{ display: 'flex', height: '100%' }}>
           <div style={{ flexGrow: 1 }}>
             <DataGrid

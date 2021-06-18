@@ -19,7 +19,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 import ArrowDropDownTwoToneIcon from '@material-ui/icons/ArrowDropDownTwoTone';
-
+import ChangePasswordList from './ChangePasswordList';
 
 const drawerWidth = 240;
 
@@ -181,9 +181,9 @@ export default function HeaderMenu() {
                   </div>
                 </MenuItem>
               </Link>
-              <Link to={`${path}/change_password`} className="nav-link">
-                <MenuItem onClick={handleClose}>Change Password</MenuItem>
-              </Link>  
+              <div onClick={handleClose} className="nav-link">
+                <ChangePasswordList />
+              </div>  
               <Link to={`${path}/logout`} className="nav-link">
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Link>
@@ -198,7 +198,7 @@ export default function HeaderMenu() {
         }}
         open={open}
       > 
-      <img src={localStorage.getItem('domain_url')+'assets/images/logo.png'} alt="logo" className="logo-img"/>
+      <img src={localStorage.getItem('domain_url')+'/assets/images/logo.png'} alt="logo" className="logo-img"/>
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />

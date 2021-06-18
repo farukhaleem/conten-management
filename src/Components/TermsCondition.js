@@ -60,7 +60,7 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <Iframe url="/terms.html"
+            <Iframe url={localStorage.getItem('domain_url')+'/terms.html'}
                 width="100%"
                 height="600px"
                 id="myId"

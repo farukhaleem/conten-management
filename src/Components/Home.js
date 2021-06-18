@@ -29,7 +29,7 @@ function Home() {
       <HeaderMenu />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="fluid">
+        <Container maxWidth={false}>
           <DashboardCards />
           <h2>Recent Orders</h2>
           <OrdersGrid />

@@ -75,7 +75,7 @@ function PlaceOrder() {
             <HeaderMenu />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container component="main" maxWidth="fluid">
+                <Container component="main" maxWidth={false}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <h1>Order Your Paper Now</h1>

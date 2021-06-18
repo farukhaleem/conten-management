@@ -82,6 +82,7 @@ export default function PlaceOrderForm(props) {
     }
 	let errorDeadline = false;
 	let errorDeadlineText = '';
+	let [disable, setDisable]= useState(true);
 
 	const subjectItems = [
 		{ title:'' ,value: 0},
@@ -271,11 +272,9 @@ export default function PlaceOrderForm(props) {
         formData.append('totalCost', values.totalCost);
         formData.append('currency', values.currency);
         const response = await submitFormData(formData);
-		console.log(response)
+		
 		if(response.status === 'success'){
-			setTimeout(function(){  
-				window.location.href = response.link ;
-			}, 2000);  
+			window.location.href = '/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+response.order_id+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token') ;
 		}
 	}
 	
@@ -334,6 +333,7 @@ export default function PlaceOrderForm(props) {
 	});
 
 	
+	
 	return (
 		<div>
 			<CssBaseline />
@@ -364,7 +364,12 @@ export default function PlaceOrderForm(props) {
 						submitForm(values);
 					}}
 				>
-					{({ errors, handleChange, touched, values }) => (
+					{({ errors, handleChange, touched, values }) => {
+						(Object.keys(errors).length === 0)
+						? setDisable(false)
+						: setDisable(true) ;
+						
+						return(
 						<Form className={classes.form} noValidate>
 							<Grid container spacing={2}>
 								<Grid item xs={12} sm={6}>
@@ -525,63 +530,6 @@ export default function PlaceOrderForm(props) {
 									/>	
 									</FormControl>
 								</Grid>			
-
-								{/* <Grid item xs={12} sm={6}>
-									<FormControl variant="outlined" className={classes.formControl}>
-										<InputLabel id="deadline-label">Deadline</InputLabel>
-										<Select
-											labelId="deadline-label"
-											id="deadline"
-											value={values.deadline}
-											onChange={(e) => {
-												handleChange("deadline")(e);
-												handleUpdate(e)
-												switch(e.target.value){
-													case '15+Days' 	: props.costPerPage[1](10); break;
-													case '10+Days' 	: props.costPerPage[1](9); break;
-													case '7+Days' 	: props.costPerPage[1](13); break;
-													case '6+Days' 	: props.costPerPage[1](14); break;
-													case '5+Days' 	: props.costPerPage[1](16); break;
-													case '4+Days' 	: props.costPerPage[1](18); break;
-													case '3+Days' 	: props.costPerPage[1](19); break;
-													case '48+Hours' : props.costPerPage[1](21); break;
-													case '24+Hours' : props.costPerPage[1](22); break;
-													case '12+Hours' : props.costPerPage[1](24); break;
-													case '6+Hours' 	: props.costPerPage[1](25); break;
-													case '3+Hours' 	: props.costPerPage[1](27); break;
-													default : props.costPerPage[1](9); break;
-												}
-											  }}
-											label="Deadline"
-											name="deadline"
-											error={errors.deadline && touched.deadline}
-										>
-											<MenuItem value="">
-												<em>None</em>
-											</MenuItem>
-											<MenuItem value='15+Days'>25 Days or Above</MenuItem>
-											<MenuItem value='15+Days'>20 Days</MenuItem>
-											<MenuItem value='15+Days'>15 Days</MenuItem>
-											<MenuItem value='10+Days'>10 Days</MenuItem>
-											<MenuItem value='7+Days'>7 Days</MenuItem>
-											<MenuItem value='6+Days'>6 Days</MenuItem>
-											<MenuItem value='5+Days'>5 Days</MenuItem>
-											<MenuItem value='4+Days'>4 Days</MenuItem>
-											<MenuItem value='3+Days'>3 Days</MenuItem>
-											<MenuItem value='48+Hours'>48 Hours</MenuItem>
-											<MenuItem value='24+Hours'>24 Hours</MenuItem>
-											<MenuItem value='12+Hours'>12 Hours</MenuItem>
-											<MenuItem value='6+Hours'>6 Hours</MenuItem>
-											<MenuItem value='3+Hours'>3 Hours</MenuItem>
-										</Select>
-										<FormHelperText className={classes.error}>{
-											errors.deadline && touched.deadline
-												? errors.deadline
-												: null
-											}
-										</FormHelperText>
-									</FormControl>
-								</Grid> */}
 
 								<Grid item xs={12} sm={6}>
 									<FormControl variant="outlined" className={classes.formControl}>
@@ -1156,7 +1104,7 @@ export default function PlaceOrderForm(props) {
 												maxFiles={25}
 												maxFileSize='25MB'
 												name="image"
-												server="/area/api/move_files.php"
+												server={localStorage.getItem('domain_url')+'/api/move_files.php'}
 												labelMaxFileSizeExceeded='File is too large'	
 												oninit={() => handleInit() }
 												labelIdle='Drag & Drop files or <span class="filepond--label-action">Browse</span>'
@@ -1216,12 +1164,13 @@ export default function PlaceOrderForm(props) {
 								fullWidth
 								variant="contained"
 								color="primary"
+								{...(disable && { disabled:true}) }
 								className={classes.submit}
 							>
 								Proceed
               				</Button>
 						</Form>
-					)}
+					)}}
 				</Formik>
 			</div>
 		</div>

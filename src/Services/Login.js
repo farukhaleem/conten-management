@@ -6,7 +6,7 @@ export const logIn = (username, password) => {
     formData.append('username', username);
     formData.append('password', password);
 
-    const res = axios.post('/area/api/login.php', formData)
+    const res = axios.post('/api/login.php', formData)
     .then(function (response) {
         return response.data;
     })

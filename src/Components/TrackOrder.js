@@ -38,12 +38,12 @@ function TrackOrder() {
       <HeaderMenu />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="fluid">
+        <Container maxWidth={false}>
           <h1>Track Order</h1>
           <TextField
             required
             autoFocus
-            style={{width: 450}}
+            style={{width: 360}}
             id="outlined-required"
             label="Enter your order"
             onChange={(e)=> setItem(e.target.value)}

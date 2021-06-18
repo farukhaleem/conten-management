@@ -1,4 +1,4 @@
-import React, {createContext} from 'react';
+import React, {createContext, useEffect} from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from './Components/SignIn';
 import Home from './Components/Home';
@@ -9,19 +9,27 @@ import ChangePassword from './Components/ChangePassword';
 import Logout from './Components/Logout';
 import NotFound from './Components/NotFound';
 import './App.css';
-
+import {fetchBrandDetails} from './Services/getOrdersService';
 
 const path = '';
 export const DomainPath = createContext(path);
   
 function App() {
 
-  localStorage.setItem('domain_name', 'PaperOwn');
-  localStorage.setItem('domain_url', 'https://www.paperown.com/');
-  localStorage.setItem('domain_code', 'POUK-100');
-  
-  document.getElementById("favicon").href= localStorage.getItem('domain_url')+'favicon.png'
-  document.title = localStorage.getItem('domain_name')+' | Student Area';
+
+  useEffect(() => {
+    async function fetchData() {
+      const brandDetails = await fetchBrandDetails();
+      localStorage.setItem('domain_name', brandDetails.name);
+      localStorage.setItem('domain_url', 'https://'+brandDetails.domain_name);
+      localStorage.setItem('domain_code', brandDetails.domain_code+'-100');
+
+      document.getElementById("favicon").href= localStorage.getItem('domain_url')+'/favicon.png'
+      document.title = localStorage.getItem('domain_name')+' | Student Area';
+
+    }
+    fetchData();
+  }, [])
   
   return (
     <DomainPath.Provider value={path} >

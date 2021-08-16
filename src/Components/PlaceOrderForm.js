@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -28,6 +28,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import TransitionsModal from './TermsCondition';
+import { DomainPath } from './../App';
 
 registerPlugin(
 	FilePondPluginFileValidateType, 
@@ -72,11 +73,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PlaceOrderForm(props) {
 
+	const path = useContext(DomainPath);
     let pond = {} ;
     let [state, setState] = useState({
         files: []
     })
-  
+
     let handleInit = () => {
         // console.log('FilePond instance has initialised', pond);
     }
@@ -86,7 +88,7 @@ export default function PlaceOrderForm(props) {
 
 	const subjectItems = [
 		{ title:'' ,value: 0},
-		{ title:'Art, Media &amp; Literature' ,value: 1},
+		{ title:'Art, Media & Literature' ,value: 1},
 		{ title:'Art' ,value: 2},
 		{ title:'Communications' ,value: 3},
 		{ title:'Design' ,value: 4},
@@ -100,7 +102,7 @@ export default function PlaceOrderForm(props) {
 		{ title:'Music' ,value: 12},
 		{ title:'Photography' ,value: 13},
 		{ title:'Theatre Studies' ,value: 14},
-		{ title:'Business &amp; Management' ,value: 15},
+		{ title:'Business & Management' ,value: 15},
 		{ title:'Advertising - Public Relations' ,value: 16},
 		{ title:'Business' ,value: 17},
 		{ title:'Employment' ,value: 18},
@@ -110,11 +112,11 @@ export default function PlaceOrderForm(props) {
 		{ title:'Marketing' ,value: 22},
 		{ title:'Security Risk Management' ,value: 23},
 		{ title:'Tourism Hospitality' ,value: 24},
-		{ title:'Computing &amp; ICT' ,value: 25},
+		{ title:'Computing & ICT' ,value: 25},
 		{ title:'Computer Science' ,value: 26},
 		{ title:'Information Systems' ,value: 27},
 		{ title:'Information Technology' ,value: 28},
-		{ title:'Construction &amp; Engineering' ,value: 29},
+		{ title:'Construction & Engineering' ,value: 29},
 		{ title:'Architecture' ,value: 30},
 		{ title:'Construction' ,value: 31},
 		{ title:'Engineering' ,value: 32},
@@ -122,25 +124,25 @@ export default function PlaceOrderForm(props) {
 		{ title:'Housing' ,value: 34},
 		{ title:'Quantity Surveying' ,value: 35},
 		{ title:'Real Estate' ,value: 36},
-		{ title:'Town &amp; Country Planning' ,value: 37},
+		{ title:'Town & Country Planning' ,value: 37},
 		{ title:'Education' ,value: 38},
-		{ title:'Children &amp; Young People' ,value: 39},
+		{ title:'Children & Young People' ,value: 39},
 		{ title:'Education' ,value: 40},
 		{ title:'Methodology' ,value: 41},
 		{ title:'PGCE' ,value: 42},
 		{ title:'Physical Education' ,value: 43},
 		{ title:'Teacher Training' ,value: 44},
 		{ title:'TESOL' ,value: 45},
-		{ title:'Finance &amp; Economics' ,value: 46},
+		{ title:'Finance & Economics' ,value: 46},
 		{ title:'Accounting' ,value: 47},
 		{ title:'Econometrics' ,value: 48},
 		{ title:'Economics' ,value: 49},
 		{ title:'Finance' ,value: 50},
-		{ title:'Health &amp; Nursing' ,value: 51},
+		{ title:'Health & Nursing' ,value: 51},
 		{ title:'Counselling' ,value: 52},
 		{ title:'Food and Nutrition' ,value: 53},
 		{ title:'Health' ,value: 54},
-		{ title:'Health &amp; Social Care' ,value: 55},
+		{ title:'Health & Social Care' ,value: 55},
 		{ title:'Mental Health' ,value: 56},
 		{ title:'Nursing' ,value: 57},
 		{ title:'Occupational Therapy' ,value: 58},
@@ -169,7 +171,7 @@ export default function PlaceOrderForm(props) {
 		{ title:'Employment Law' ,value: 81},
 		{ title:'English Legal System (Law)' ,value: 82},
 		{ title:'Environmental - Biodiversity - Planning Law' ,value: 83},
-		{ title:'Equity &amp; Trusts Law' ,value: 84},
+		{ title:'Equity & Trusts Law' ,value: 84},
 		{ title:'European (EU) Law' ,value: 85},
 		{ title:'Family Law' ,value: 86},
 		{ title:'Finance Law' ,value: 87},
@@ -177,7 +179,7 @@ export default function PlaceOrderForm(props) {
 		{ title:'Human Rights' ,value: 89},
 		{ title:'Human Rights Law' ,value: 90},
 		{ title:'Immigration - Refugee Law' ,value: 91},
-		{ title:'Information - Media &amp; Technology Law' ,value: 92},
+		{ title:'Information - Media & Technology Law' ,value: 92},
 		{ title:'International Commercial Law' ,value: 93},
 		{ title:'International Criminal Law' ,value: 94},
 		{ title:'International Law' ,value: 95},
@@ -185,7 +187,7 @@ export default function PlaceOrderForm(props) {
 		{ title:'Intellectual Property Law' ,value: 97},
 		{ title:'Investment - WTO Law' ,value: 98},
 		{ title:'Jurisprudence (Law)' ,value: 99},
-		{ title:'Landlord &amp; Tenant - Housing Law' ,value: 100},
+		{ title:'Landlord & Tenant - Housing Law' ,value: 100},
 		{ title:'Land - property Law' ,value: 101},
 		{ title:'Law of Evidence' ,value: 102},
 		{ title:'Law of the Sea - Territorial Waters Law' ,value: 103},
@@ -193,12 +195,12 @@ export default function PlaceOrderForm(props) {
 		{ title:'Maritime - Marine Insurance Law' ,value: 105},
 		{ title:'Medical Law' ,value: 106},
 		{ title:'Mental Health Law' ,value: 107},
-		{ title:'Oil &amp; Gas Law' ,value: 108},
+		{ title:'Oil & Gas Law' ,value: 108},
 		{ title:'Social Work Law' ,value: 109},
 		{ title:'Sports Law' ,value: 110},
 		{ title:'Tax - Revenue Law' ,value: 111},
 		{ title:'Tort Law' ,value: 112},
-		{ title:'Mathematics &amp; Statistics' ,value: 113},
+		{ title:'Mathematics & Statistics' ,value: 113},
 		{ title:'Maths' ,value: 114},
 		{ title:'SPSS' ,value: 115},
 		{ title:'Statistics' ,value: 116},
@@ -206,8 +208,8 @@ export default function PlaceOrderForm(props) {
 		{ title:'Dentistry' ,value: 115},
 		{ title:'Medicine' ,value: 116},
 		{ title:'Paramedic Studies' ,value: 117},
-		{ title:'Radiology &amp; Medical Technology' ,value: 118},
-		{ title:'Politics &amp; International Relations' ,value: 119},
+		{ title:'Radiology & Medical Technology' ,value: 118},
+		{ title:'Politics & International Relations' ,value: 119},
 		{ title:'European Studies' ,value: 120},
 		{ title:'International Political Economy' ,value: 121},
 		{ title:'International Relations' ,value: 122},
@@ -234,8 +236,8 @@ export default function PlaceOrderForm(props) {
 		{ title:'History' ,value: 143},
 		{ title:'Philosophy' ,value: 144},
 		{ title:'Sociology' ,value: 145},
-		{ title:'Theology &amp; Religion' ,value: 146},
-		{ title:'Sport &amp; Exercise Sciences' ,value: 147},
+		{ title:'Theology & Religion' ,value: 146},
+		{ title:'Sport & Exercise Sciences' ,value: 147},
 		{ title:'Health Psychology' ,value: 148},
 		{ title:'Physiotherapy' ,value: 149},
 		{ title:'Sports Psychology' ,value: 150},
@@ -274,7 +276,7 @@ export default function PlaceOrderForm(props) {
         const response = await submitFormData(formData);
 		
 		if(response.status === 'success'){
-			window.location.href = '/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+response.order_id+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token') ;
+			window.location.href = '/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+response.order_id+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token')+'&marchantToken='+localStorage.getItem('marchantToken') ;
 		}
 	}
 	
@@ -321,13 +323,12 @@ export default function PlaceOrderForm(props) {
 	};
 
 	let SignupSchema = yup.object().shape({
-		paperTopic: yup.string().required('Paper Topic is required.'),
 		paperType: yup.string().required('Paper Type is required.'),
 		deadline: yup.string().required('Deadline is required.'),
 		style: yup.string().required('Style is required.'),
 		language: yup.string().required('Language is required.'),
 		pages: yup.string().required('No. of Pages/ Word Count is required.'),
-		subjectArea: yup.string().required('Subject Area is required.'),
+		// subjectArea: yup.string().required('Subject Area is required.'),
 		references: yup.string().required('No of References is required.'),
 		term: yup.bool().oneOf([true], 'Accept Terms & Conditions is required'),
 	});
@@ -344,15 +345,15 @@ export default function PlaceOrderForm(props) {
 				<Formik
 					initialValues={{
 						paperTopic: "",
-						paperType: "",
+						paperType: 11,
 						deadline: initialDeadline,
-						style: "",
-						language: "",
-						pages: "",
-						subjectArea: "",
-						references: "",
-						currency:"GBP",
-						costPerPage: props.costPerPage[0],
+						style: "Harvard - standard",
+						language: props.state[0].language,
+						pages: 1,
+						subjectArea: '',
+						references: 5,
+						currency: props.state[0].currency,
+						costPerPage: Number(props.costPerPage[0]),
 						totalCost: 0,
 						pageType: "single space",
 						academicLevel: "High School",
@@ -388,11 +389,11 @@ export default function PlaceOrderForm(props) {
 											handleChange("paperTopic")(e);
 											handleUpdate(e)
 										}}
-										helperText={
-											errors.paperTopic && touched.paperTopic
-												? errors.paperTopic
-												: null
-										}
+										// helperText={
+										// 	errors.paperTopic && touched.paperTopic
+										// 		? errors.paperTopic
+										// 		: null
+										// }
 									/>
 								</Grid>
 								
@@ -479,47 +480,47 @@ export default function PlaceOrderForm(props) {
 												errorDeadlineText = 'Deadline should be more then 3 hours.';
 											}else if(time > 180 && time < 360){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](27); 
+												props.costPerPage[1](Math.round(path[0].startingPrice*3)); 
 												props.deadline[1](hours)
 											}else if(time > 360 && time < 720){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](25)
+												props.costPerPage[1](Math.round(path[0].startingPrice*2.7))
 												props.deadline[1](hours)
 											}else if(time > 720 && time < 1440){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](24)
+												props.costPerPage[1](Math.round(path[0].startingPrice*2.6))
 												props.deadline[1](hours)
 											}else if(time > 1440 && time < 2880){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](22)
+												props.costPerPage[1](Math.round(path[0].startingPrice*2.4))
 												props.deadline[1](hours)
 											}else if(time > 2880 && time < 4320){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](21)
+												props.costPerPage[1](Math.round(path[0].startingPrice*2.3))
 												props.deadline[1](days)
 											}else if(time > 4320 && time < 5760){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](19)
+												props.costPerPage[1](Math.round(path[0].startingPrice*2.1))
 												props.deadline[1](days)
 											}else if(time > 5760 && time < 7200){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](18)
+												props.costPerPage[1](Math.round(path[0].startingPrice*2))
 												props.deadline[1](days)
 											}else if(time > 7200 && time < 8640){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](16)
+												props.costPerPage[1](Math.round(path[0].startingPrice*1.7))
 												props.deadline[1](days)
 											}else if(time > 8640 && time < 10080){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](14)
+												props.costPerPage[1](Math.round(path[0].startingPrice*1.5))
 												props.deadline[1](days)
 											}else if(time > 10080 && time < 14400){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](13)
+												props.costPerPage[1](Math.round(path[0].startingPrice*1.4))
 												props.deadline[1](days)
 											}else if(time > 14400){
 												errorDeadline = false; errorDeadlineText = '';
-												props.costPerPage[1](9)
+												props.costPerPage[1](Math.round(path[0].startingPrice*1))
 												props.deadline[1](days)
 											}else{
 												errorDeadline = false; errorDeadlineText = '';
@@ -1005,11 +1006,11 @@ export default function PlaceOrderForm(props) {
 											id="subjectArea"
 											label="Subject Area"
 											error={errors.subjectArea && touched.subjectArea}
-											helperText={
-												errors.subjectArea && touched.subjectArea
-													? errors.subjectArea
-													: null
-											}
+											// helperText={
+											// 	errors.subjectArea && touched.subjectArea
+											// 		? errors.subjectArea
+											// 		: null
+											// }
 										/>
 										}
 										/>
@@ -1028,7 +1029,7 @@ export default function PlaceOrderForm(props) {
 											handleChange("costPerPage")(e);
 											handleUpdate(e)
 										}}
-										value={parseFloat(props.costPerPage[0] * props.currencyRate[0]).toFixed(2)}
+										value={parseFloat(Number(props.costPerPage[0]) * props.currencyRate[0]).toFixed(2)}
 										fullWidth
 										id="costPerPage"
 										label="Cost Per Page"
@@ -1046,7 +1047,7 @@ export default function PlaceOrderForm(props) {
 											handleChange("totalCost")(e);
 											handleUpdate(e);
 										}}
-										value={values.totalCost = parseFloat(props.costPerPage[0] * values.pages * props.currencyRate[0]).toFixed(2)}
+										value={values.totalCost = parseFloat(Number(props.costPerPage[0]) * values.pages * props.currencyRate[0]).toFixed(2)}
 										fullWidth
 										id="totalCost"
 										label="Total Cost"
@@ -1164,7 +1165,6 @@ export default function PlaceOrderForm(props) {
 								fullWidth
 								variant="contained"
 								color="primary"
-								{...(disable && { disabled:true}) }
 								className={classes.submit}
 							>
 								Proceed

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react'
-import { DomainPath } from './../App';
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { ResetPass } from './../Services/ResetPassword';
@@ -48,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 let ChangePasswordForm = () => {
-	const path = useContext(DomainPath);
 	const classes = useStyles();
 	
 	let [err, setErr] = useState('');
@@ -108,9 +106,18 @@ let ChangePasswordForm = () => {
 			let response = await ResetPass(newPass, resPass);
 			if(response.status === 'success'){
 				setResMsg("Your password has successfully changed. You need to login again.");
-				localStorage.clear();
+				
+				localStorage.removeItem('user');
+				localStorage.removeItem('id');
+				localStorage.removeItem('userName');
+				localStorage.removeItem('token');
+				localStorage.removeItem('role');
+				localStorage.removeItem('user_token');
+				localStorage.removeItem('domain_token');
+				localStorage.removeItem('pm');
+
 				setTimeout(function(){ 
-					window.location.href = path; 
+					window.location.href = '/'; 
 				}, 3000);
 			}
 		}

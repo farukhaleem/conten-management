@@ -62,7 +62,7 @@ export default function OrdersGrid() {
                 style={{color:'#fff'}} 
                 target="_blank" 
                 rel="noreferrer noopener" 
-                href={'/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+params.row.payNow+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token')} 
+                href={'/api/payment-proceed.php?token='+localStorage.getItem('token')+'&order_id='+params.row.payNow+'&user_token='+localStorage.getItem('user_token')+'&domain_token='+localStorage.getItem('domain_token')+'&marchantToken='+localStorage.getItem('marchantToken')} 
                 className="nav-link">
                 Pay Now
               </a>

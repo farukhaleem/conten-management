@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { DomainPath } from './../App';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -115,9 +114,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeaderMenu() {
-  
   const [anchorEl, setAnchorEl] = useState(null);
-  const path = useContext(DomainPath);
   const classes = useStyles();
   const [open, setOpen] = useState(Boolean(localStorage.getItem('drawerOpen')));
   const handleDrawerOpen = () => {
@@ -139,7 +136,7 @@ export default function HeaderMenu() {
   };
 
   if (!localStorage.getItem('role')) {
-    return (<Redirect to={`${path}/login`} />);
+    return (<Redirect to='/login' />);
   }
 
   
@@ -162,6 +159,7 @@ export default function HeaderMenu() {
             Dashboard
           </Typography>
           <div>
+            <b className="wallet">£ {parseFloat(localStorage.getItem('pm')).toFixed(2)}</b>
             <Button color="inherit" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
               <p className={classes.userName}>{localStorage.getItem('userName')}</p>
               <ArrowDropDownTwoToneIcon />
@@ -173,18 +171,10 @@ export default function HeaderMenu() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <Link to={`${path}/`} className="nav-link">
-                <MenuItem onClick={handleClose}>
-                  <div className={classes.wallet}>
-                    <span>Wallet</span>
-                    <b>£ 0.00</b>
-                  </div>
-                </MenuItem>
-              </Link>
               <div onClick={handleClose} className="nav-link">
                 <ChangePasswordList />
               </div>  
-              <Link to={`${path}/logout`} className="nav-link">
+              <Link to='/logout' className="nav-link">
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Link>
             </Menu>
@@ -197,8 +187,10 @@ export default function HeaderMenu() {
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
         open={open}
-      > 
-      <img src={localStorage.getItem('domain_url')+'/assets/images/logo.png'} alt="logo" className="logo-img"/>
+      >
+      <Link to='/' className="logoBox"> 
+        <img src={localStorage.getItem('domain_url')+'/assets/images/logo.png'} alt="logo" className="logo-img"/>
+      </Link>
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />

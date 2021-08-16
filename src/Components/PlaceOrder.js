@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Container from '@material-ui/core/Container';
 import PlaceOrderForm from './PlaceOrderForm';
 import Grid from '@material-ui/core/Grid';
-
+import { DomainPath } from './../App';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderMenu from './HeaderMenu';
 import Card from '@material-ui/core/Card';
@@ -28,25 +28,34 @@ const useStyles = makeStyles((theme) => ({
 
 function PlaceOrder() {
     const classes = useStyles();
+    const path = useContext(DomainPath);
+      
+    let currencyType = '', lanType;
+    switch(localStorage.getItem('region')){
+      case 'US' : currencyType = 'USD'; lanType = 'English (U.S.)'; break;
+      case 'AUS': currencyType = 'AUD'; lanType = 'English (U.S.)'; break;
+      case 'UK' : currencyType = 'GBP'; lanType = 'English (U.K.)'; break;
+      default   : currencyType = 'GBP'; lanType = 'English (U.K.)'; break;
+    }
     
     let initialState = {
-      paperTopic: "",
-      paperType: "",
+      paperTopic: '',
+      paperType: 11,
       deadline: "",
-      style: "",
-      language: "",
-      pages: "",
-      subjectArea: "",
-      references: "",
-      currency:"GBP",
-      costPerPage: 9,
+      style: "Harvard - standard",
+      language: lanType,
+      pages: 1,
+      subjectArea: '',
+      references: 5,
+      currency: currencyType,
+      costPerPage: Number(path[0].startingPrice),
       totalCost: 0,
       pageType: "single space",
       academicLevel: "High School",
       detail: "",
       term: false,
       sub_area_caption: '',
-    }
+    } 
 
     let currency = {
       USD : 1.42,
@@ -62,12 +71,28 @@ function PlaceOrder() {
     }, [])  
 
     let state = useState(initialState);
-    let pdtCaption = useState('');
+    let pdtCaption = useState('Assignment');
     let subject = useState('');
-    let costPerPage = useState(9);
+    let costPerPage = useState(path[0].startingPrice);
     let currencyRate = useState(currency.GBP);
     let deadline = useState('10 Days');
+    document.title = `Place Order | ${localStorage.getItem('userName')} | ${localStorage.getItem('domain_name')}`;
     
+    if(typeof(path[0].startingPrice) !== 'undefined' && typeof(costPerPage[0]) === 'undefined'){
+
+      costPerPage[1](path[0].startingPrice);
+
+      switch(localStorage.getItem('region')){
+        case 'US' : currencyType = 'USD'; break;
+        case 'AUS': currencyType = 'AUD'; break;
+        case 'UK' : currencyType = 'GBP'; break;
+        default   : currencyType = 'GBP'; break;
+      }
+
+      state[1]( pre => ({...pre, currency:currencyType} ) );
+    }
+    
+
     return (
 
         <div className={classes.root}>

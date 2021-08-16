@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
 
 function OrderPreview() {
   const classes = useStyles();
+  document.title = `Order Preview | ${localStorage.getItem('userName')} | ${localStorage.getItem('domain_name')}`;
+
   return (
     <div className={classes.root}>
       <HeaderMenu />

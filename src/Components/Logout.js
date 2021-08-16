@@ -1,11 +1,17 @@
-import {useContext} from 'react';
-import { DomainPath } from './../App';
+import { Redirect } from 'react-router-dom';
 
 function Logout(){
-    const path = useContext(DomainPath);
     
-    localStorage.clear();
-    window.location.href = path;
+    localStorage.removeItem('user');
+    localStorage.removeItem('id');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('domain_token');
+    localStorage.removeItem('pm');
+    
+    return(<Redirect to='/' />);
 
 }
 

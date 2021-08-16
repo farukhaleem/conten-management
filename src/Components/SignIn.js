@@ -1,17 +1,15 @@
-import React, {useState, useContext} from 'react';
-import { DomainPath } from './../App';
-import Avatar from '@material-ui/core/Avatar';
+import React, {useState, useContext}  from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory , Redirect } from 'react-router-dom';
 import { logIn } from './../Services/Login';
+import { DomainPath } from './../App';
 
 function Copyright() {
   
@@ -52,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  
-  const classes = useStyles();
+
   const path = useContext(DomainPath);
+  const classes = useStyles();
 
   let initialError = {
     username : null,
@@ -70,8 +68,8 @@ export default function SignIn() {
   const validate = () => {
     
     let temp = {} ;
-    temp.username = username ? '' : "* Email is required" ;
-    temp.password = password ? '' : "* Password is required" ;
+    temp.username = username ? '' : "Error: Email is required" ;
+    temp.password = password ? '' : "Error: Password is required" ;
     setError({ 
       ...temp 
     })
@@ -95,28 +93,32 @@ export default function SignIn() {
           localStorage.setItem('role', true);
           localStorage.setItem('user_token', user.user_token);
           localStorage.setItem('domain_token', user.domain_token);
-          return history.push(path+'/')
+          localStorage.setItem('pm', user.pm);
+          path[1](pre => ({...pre, ...user}));
+          
+          return history.push('/')
+        
         }else if(user.status === 'error'){
           setReq(user.msg);
         }
       
       }
       fetchData(); 
-      
-        
   } 
   
   if(localStorage.getItem('role')){
-    return (<Redirect to={`${path}/`} />)
+    return (<Redirect to='/' />)
   }
+
+  document.title = `Login | ${localStorage.getItem('domain_name')}`;
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Link color="inherit" target="_blank" href={localStorage.getItem('domain_url')}>
+          <img src={localStorage.getItem('domain_url')+'/assets/images/logo.png'} alt="logo" className="logo"/>
+        </Link>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>

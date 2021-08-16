@@ -1,47 +1,67 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { getOrder } from './../Services/getOrdersService';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
-    link:{
-      display: 'inline',
-      textDecoration: 'underline',
-      cursor: 'pointer',
-      color: 'rgb(111 111 111 / 87%)',
-      fontWeight: 600,
-      fontSize: 14
+    link: {
+        display: 'inline',
+        textDecoration: 'underline',
+        cursor: 'pointer',
+        color: 'rgb(111 111 111 / 87%)',
+        fontWeight: 600,
+        fontSize: 14
     },
     modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     paper: {
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-      width: 600,
-      maxWidth: 600,
-      },
-  }));
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        width: 600,
+        maxWidth: 600,
+    },
+    loader: {
+		justifyContent: 'center',
+		display: 'flex',
+		'& > * + *': {
+			marginLeft: theme.spacing(2),
+		},
+	},
+}));
 
-let OrderData = (props) => { 
+let OrderData = (props) => {
     const classes = useStyles();
-    
+
     let [order, setOrder] = useState({});
     const [dense, setDense] = React.useState(false);
 
     useEffect(() => {
         async function fetchData() {
-          const orderData = await getOrder(props.orderId);
-          setOrder(orderData[0]);
+            const orderData = await getOrder(props.orderId);
+            setOrder(orderData[0]);
         }
         fetchData();
-      }, [])
+    }, [])
+
+    if (!Object.keys(order).length) {
+        return (
+            <div className={classes.paper}>
+                <div className={classes.demo}>
+                    <div className={classes.loader}>
+                        <CircularProgress />
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={classes.paper}>
@@ -52,9 +72,9 @@ let OrderData = (props) => {
                             primary="Order ID"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.order_code+order.order_id}
-                        />  
+                            <ListItemText
+                                primary={order.order_code + order.order_id}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -62,9 +82,9 @@ let OrderData = (props) => {
                             primary="Total Amount"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.currency_code+' '+order.total_payment}
-                        />  
+                            <ListItemText
+                                primary={order.currency_code + ' ' + order.total_payment}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -72,9 +92,9 @@ let OrderData = (props) => {
                             primary="Paper Topic"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.topic}
-                        />  
+                            <ListItemText
+                                primary={order.topic}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -82,9 +102,9 @@ let OrderData = (props) => {
                             primary="Type Of Paper"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.paper_type_caption}
-                        />  
+                            <ListItemText
+                                primary={order.paper_type_caption}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -92,9 +112,9 @@ let OrderData = (props) => {
                             primary="Deadline"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.deadline}
-                        />  
+                            <ListItemText
+                                primary={order.deadline}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -102,9 +122,9 @@ let OrderData = (props) => {
                             primary="Style"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.style}
-                        />  
+                            <ListItemText
+                                primary={order.style}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -112,9 +132,9 @@ let OrderData = (props) => {
                             primary="Language"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.language}
-                        />  
+                            <ListItemText
+                                primary={order.language}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -122,9 +142,9 @@ let OrderData = (props) => {
                             primary="Nubmer Of Pages/Words"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.num_of_page+' pages / ' +order.num_of_page*250+' Word count'}
-                        />  
+                            <ListItemText
+                                primary={order.num_of_page + ' pages / ' + order.num_of_page * 250 + ' Word count'}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -132,9 +152,9 @@ let OrderData = (props) => {
                             primary="Academic Level"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.academic_level}
-                        />  
+                            <ListItemText
+                                primary={order.academic_level}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -142,9 +162,9 @@ let OrderData = (props) => {
                             primary="Subject Area"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.sub_area}
-                        />  
+                            <ListItemText
+                                primary={order.sub_area}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -152,9 +172,9 @@ let OrderData = (props) => {
                             primary="Number of References"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.num_ref}
-                        />  
+                            <ListItemText
+                                primary={order.num_ref}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -162,9 +182,9 @@ let OrderData = (props) => {
                             primary="Detail"
                         />
                         <ListItemSecondaryAction>
-                        <ListItemText
-                            primary={order.details}
-                        />  
+                            <ListItemText
+                                primary={order.details}
+                            />
                         </ListItemSecondaryAction>
                     </ListItem>
                 </List>

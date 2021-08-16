@@ -5,7 +5,6 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import HeaderMenu from './HeaderMenu';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -19,11 +18,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     background: '#f4f0f4'
   }
-})
-);
+}));
 
 function Home() {
+  
   const classes = useStyles();
+  document.title = `Dashboard | ${localStorage.getItem('userName')} | ${localStorage.getItem('domain_name')}`;
+
   return (
     <div className={classes.root}>
       <HeaderMenu />

@@ -51,22 +51,23 @@ h2{
   }
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+@media only screen and (min-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }    
 }
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
 .nav-link{
   text-decoration: none;
   color: rgba(0, 0, 0, 0.87);
@@ -111,8 +112,12 @@ color: #3f51b5;
 .logo-img{
   width: 60%;
   position: absolute;
-  top: 18px;
+  max-height: 60px;
+  margin: auto;
+  top: 0;
+  bottom: 0;
   left: 24px;
+  object-fit: contain;
 }
 .filepond--root .filepond--drop-label {
   height: 200px;
@@ -267,6 +272,22 @@ button[type="submit"] .MuiButton-label{
   width: 0.8em;
   height: 0.8em;
 }
+img.logo {
+  width: 200px;
+}
+
+.wallet{
+  border: 1px solid #d6bebe;
+  padding: 5px 15px;
+  /* cursor: pointer; */
+  margin-right: 10px;
+}
+.logoBox{
+  height: 64px;
+  position: absolute;
+  width: 100%;
+}
+
 
 @media only screen and (max-width: 767px){
 

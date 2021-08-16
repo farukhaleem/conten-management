@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
-import { DomainPath } from './App';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,12 +9,11 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import BarChartIcon from '@material-ui/icons/BarChart';
 
 export function MainListItems() {
-  const path = useContext(DomainPath);
   
   let initObj = {
     dashboard: "",
     placeorder: "",
-    preview: "",
+    preview: "", 
     track: ""
   }
 
@@ -30,7 +28,7 @@ export function MainListItems() {
 
   return (
     <div>
-      <Link to={`${path}/`} className={`nav-link ${initObj.dashboard}`}>
+      <Link to='/' className={`nav-link ${initObj.dashboard}`}>
         <ListItem button className={`navBtn`} >
           <ListItemIcon >
             <DashboardIcon/>
@@ -38,7 +36,7 @@ export function MainListItems() {
           <ListItemText primary="Dashboard" />
         </ListItem>
       </Link>
-      <Link to={`${path}/placeorder`} className={`nav-link ${initObj.placeorder}`} >
+      <Link to='/placeorder' className={`nav-link ${initObj.placeorder}`} >
         <ListItem button className="navBtn">
           <ListItemIcon>
             <ShoppingCartIcon />
@@ -46,7 +44,7 @@ export function MainListItems() {
           <ListItemText primary="Place New Order" />
         </ListItem>
       </Link>
-      <Link to={`${path}/order_preview`} className={`nav-link ${initObj.preview}`} >
+      <Link to='/order_preview' className={`nav-link ${initObj.preview}`} >
         <ListItem button className="navBtn">
           <ListItemIcon>
             <VisibilityIcon />
@@ -54,7 +52,7 @@ export function MainListItems() {
           <ListItemText primary="Order Preview" />
         </ListItem>
       </Link>
-      <Link to={`${path}/track_order`} className={`nav-link ${initObj.track}`} >
+      <Link to='/track_order' className={`nav-link ${initObj.track}`} >
         <ListItem button className="navBtn">
           <ListItemIcon>
             <BarChartIcon />

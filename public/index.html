@@ -16,6 +16,21 @@
     <link rel="apple-touch-icon" />
    
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script>
+
+      var imported = document.createElement("script");
+      imported.src = localStorage.domain_url+"/assets/js/general.js";  
+      document.getElementsByTagName("head")[0].appendChild(imported);
+
+      
+      if(localStorage.getItem('visit_type') === 'first_visit'){
+          var importedTracker = document.createElement("script");
+          importedTracker.src = localStorage.domain_url+"/assets/js/tracker.js";  
+          document.getElementsByTagName("head")[0].appendChild(importedTracker);
+          localStorage.removeItem('visit_type');
+      }
+      
+      </script>
     </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

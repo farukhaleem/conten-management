@@ -1,8 +1,7 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { DomainPath } from './../App';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,8 +67,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NotFound() {
-    const path = useContext(DomainPath);
     const classes = useStyles();
+    document.title = `Not Found | ${localStorage.getItem('userName')} | ${localStorage.getItem('domain_name')}`;
+
     return (
         <div className={classes.root} >
             <div className={classes.notfound}>
@@ -86,7 +86,7 @@ export default function NotFound() {
                 </h2>
                 <Button variant="contained" color="primary">
                     <Link
-                        to={`${path}/`} 
+                        to='/' 
                         className="nav-link"
                         style={{color:"#fff"}}
                     >

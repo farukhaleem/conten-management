@@ -31,7 +31,7 @@ function TrackOrder() {
   let hendleupdate = () => {
     setOrderId(item);
   }
- 
+  document.title = `Track Order | ${localStorage.getItem('userName')} | ${localStorage.getItem('domain_name')}`;
 
   return (
     <div className={classes.root}>

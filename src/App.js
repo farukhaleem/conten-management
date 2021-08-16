@@ -1,4 +1,4 @@
-import React, {createContext, useEffect} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import SignIn from './Components/SignIn';
 import Home from './Components/Home';
@@ -11,28 +11,32 @@ import NotFound from './Components/NotFound';
 import './App.css';
 import {fetchBrandDetails} from './Services/getOrdersService';
 
-const path = '';
+let path = {};
 export const DomainPath = createContext(path);
   
 function App() {
 
+  let brandDetail = useState({}); 
 
   useEffect(() => {
     async function fetchData() {
       const brandDetails = await fetchBrandDetails();
+      
       localStorage.setItem('domain_name', brandDetails.name);
       localStorage.setItem('domain_url', 'https://'+brandDetails.domain_name);
       localStorage.setItem('domain_code', brandDetails.domain_code+'-100');
-
-      document.getElementById("favicon").href= localStorage.getItem('domain_url')+'/favicon.png'
-      document.title = localStorage.getItem('domain_name')+' | Student Area';
-
+      localStorage.setItem('marchantToken', brandDetails.marchantToken);
+      localStorage.setItem('starting', brandDetails.startingPrice);
+      localStorage.setItem('region',brandDetails.region);
+      
+      brandDetail[1](pre => ({...pre, ...brandDetails}));
+      document.getElementById("favicon").href= localStorage.getItem('domain_url')+'/favicon.png'      
     }
     fetchData();
-  }, [])
+  }, []);
   
   return (
-    <DomainPath.Provider value={path} >
+    <DomainPath.Provider value={brandDetail} >
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
